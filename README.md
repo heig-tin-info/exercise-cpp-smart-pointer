@@ -24,8 +24,8 @@ Ces deux mécanismes peuvent tous deux utiliser le *comptage de références* ; 
 4. Prendre connaissance des ficheirs `unique.cpp` et `shared.cpp`.
 5. Répondre aux questions suivantes :
   - Que veut dire `= delete` les fichiers `unique.cpp` et `shared.cpp` ?
-  - Pourquoi est-ce que le compteur de référence `Counter` doit être stocké sur le *heap* ?
-  - 
+  - Pourquoi est-ce que le compteur de référence `counter` doit être stocké sur le *heap* ?
+
 # Quel est le besoin ?
 
 Il est parfois essentiel
