@@ -1,42 +1,16 @@
 #include <iostream>
 using namespace std;
- 
-class Counter {
-    size_t m_counter{};    
-public:
-    Counter() : m_counter(0){};
- 
-    Counter(const Counter&) = delete;
-    Counter& operator=(const Counter&) = delete;
- 
-    ~Counter() {}
- 
-    void reset() { m_counter = 0; }
-    size_t get() { return m_counter; }
-
-    // Prefix
-    void operator++() { ++m_counter; }
-    void operator--() { --m_counter; } 
-    // Postfix
-    void operator++(int) { m_counter++; }
-    void operator--(int) { m_counter--; }
-
-    friend ostream& operator<<(ostream& os, const Counter& counter)
-    {
-        return os << "Counter Value : " << counter.m_counter << endl;
-    }
-};
- 
+  
 template <typename T>
 class Shared_ptr 
 {
-    Counter* counter; // Reference counter    
+    size_t* counter; // Reference counter    
     T* ptr; // Shared pointer
 
 public:
     explicit Shared_ptr(T* ptr = nullptr) {
         this->ptr = ptr;
-        counter = new Counter();
+        counter = new size_t();
         if (ptr) (*counter)++;
     }
  
@@ -47,7 +21,7 @@ public:
         (*counter)++;
     }
  
-    size_t use_count() { return counter->get(); }
+    size_t use_count() { return counter; }
  
     T* get() { return ptr; }
  
@@ -56,15 +30,14 @@ public:
    
     ~Shared_ptr() {
         (*counter)--;
-        if (counter->get() == 0) {
+        if (counter == 0) {
             delete counter;
             delete ptr;
         }
     }
  
     friend ostream& operator<<(ostream& os, Shared_ptr<T>& sp) {
-        os << "Address pointed : " << sp.get() << endl;
-        return os << *(sp.counter) << endl;
+        return os << "P(" << sp.get() << " x " << *sp.counter << ")" << endl;
     }
 };
  
@@ -75,27 +48,27 @@ int main()
     cout << "# Shared pointer p\n";
     *p = 100;
     cout << "p's value now: " << *p << endl;
-    cout << p;
+    cout << p << endl;
  
     {
         // q pointing to same integer which p is pointing to 
         // Shared pointer reference counter should have increased now to 2.
         Shared_ptr<int> q = p;
         cout << "# Shared pointers p, q\n";
-        cout << p << q;
+        cout << p << q << endl;
 
         {
             // r pointing to same integer which p and q are pointing to.
             // Shared pointer reference counter should have increased now to 3.
             Shared_ptr<int> r(q);
             cout << "# Shared pointers p, q, r\n";
-            cout << p << q << r;
+            cout << p << q << r << endl;
         }
  
         // r is out of scope. It would have been deleted.
         // So shared pointer reference counter should have decreased now to 2.
         cout << "# Shared pointers p, q\n";
-        cout << p << q;
+        cout << p << q << endl;
     }
  
     // q is out of scope.
