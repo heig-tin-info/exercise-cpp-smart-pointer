@@ -15,15 +15,17 @@ Ces deux mécanismes peuvent tous deux utiliser le *comptage de références* ; 
 
 # Objectifs de l'exercice
 
-1 Visionner la vidéo de *The Chemo*.
-2 Écrire un programme mettant en oeuvre les trois smart pointers du C++ :
+1. Visionner la vidéo de *The Chemo*.
+2. Écrire un programme mettant en oeuvre les trois smart pointers du C++ :
   - `unique_ptr` ;
   - `shared_ptr` ;
   - `weak_ptr`.
-3 Imaginer un contexte ou ce type de pointeur pourrait être utile.
-4 Répondre aux questions suivantes :
-  - Que veut dire `= delete` dans le constructeur par copie d'un `unique_ptr` ?
-  - Pourquoi est-ce que le compteur de référence doit être stocké sur le *heap* ?
+3. Imaginer un contexte ou ce type de pointeur pourrait être utile.
+4. Prendre connaissance des ficheirs `unique.cpp` et `shared.cpp`.
+5. Répondre aux questions suivantes :
+  - Que veut dire `= delete` les fichiers `unique.cpp` et `shared.cpp` ?
+  - Pourquoi est-ce que le compteur de référence `Counter` doit être stocké sur le *heap* ?
+  - 
 # Quel est le besoin ?
 
 Il est parfois essentiel
